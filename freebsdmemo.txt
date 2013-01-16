@@ -1,0 +1,65 @@
+﻿关于Freebsd的邮件服务
+
+邮件概述
+
+大多数合法的邮件都来源于某个桌面系统上的用户，他们一般会使用
+装有Outlook，Eudora，Thunderbird等的Windows或Mac系统。
+
+客户端发送邮件到邮件服务器上————几乎每个公司或ISP（Internet Service Provider）
+都有其专有的邮件服务器。为了保证邮件符合Internet标准，服务器对邮件进行一些基本的
+合理性检查，然后查找负责收件地址的服务器。一旦找到收件服务器，它就会将邮件传送过去。
+当收件人检查自己的邮件的时候，其客户端程序会登录邮件服务器并将新邮件下载到本地桌面上。
+如果，收件人回信的话，整个过程就会逆转过来再进行一次。
+
+
+查找一个域的邮件服务器
+
+邮件服务器彼此间交换邮件，但他们如何找到对方？例如，我的个人邮件来自域名blackhelicopter.org，
+如果我写了一封邮件给freebsd.org的用户，我的邮件服务器怎样找到freebsd.org的邮件服务器？
+
+每个域通过DNS发布邮件交换（Mail eXchange, MX）记录，我们在第14章曾提到过MX记录（没有MX记录，email
+就会退化成灵活性少很多的A记录）。一个接收邮件的域的DNS记录会包含一条或多条MX记录，每条MX记录会
+带有一个设定值的数字。我们通过MX查询查找freebsd.org的邮件交换机：
+
+# dig freebsd.org mx
+...
+;; QUESTION SECTION:
+;freebsd.org. IN MX
+;; ANSWER SECTION:
+freebsd.org. 381 IN MX 10 mx1.freebsd.org.
+
+freebsd.org仅有一个MX服务器，具有设定值10。所有发送给freebsd.org的邮件都会通过mx1.freebsd.org。将这
+一结果与大型商务公司比较:
+
+# dig cnn.com mx
+...
+;; QUESTION SECTION:
+;cnn.com. IN MX
+
+;; ANSWER SECTION:
+ cnn.com. 3600 IN MX 30 lonmail1.turner.com.
+ cnn.com. 3600 IN MX 40 hkgmail1.turner.com.
+ cnn.com. 3600 IN MX 10 atlmail3.turner.com.
+ cnn.com. 3600 IN MX 10 atlmail5.turner.com.
+ cnn.com. 3600 IN MX 20 nycmail1.turner.com.
+ cnn.com. 3600 IN MX 20 nycmail2.turner.com.
+
+CNN有六个邮件交换机，两个具有优先值10(最低的数字)，所以发往cnn.com的邮件会首先尝试发送给atlmail3.turner.com或atlmail5.turner.com。
+如过该服务器掉线的话，会再尝试优先值20的服务器nycmail1.turner.com和nycmail2.turner.com。如果优先值10和20的服务器都掉线了的话，会再
+一次尝试优先值30和40的服务器。
+
+维护单一的MX记录是逐渐流行的反垃圾邮件的手法，如果你的域有一个有效的DNS，发送方将连日来的邮件排队。结果备份的邮件交换机不知道域的
+哪个收件人有效，使它成为接受垃圾的第一候选。许多反垃圾工具使用备份的MX作为域中的路由，虽然之前我曾提到每个域都应该有多个MX主机，但是
+这正变得困难不考虑你与垃圾邮件作斗争的时间
+
+
+无法发送的邮件
+
+当邮件服务器找到一个域的邮件交换机，但所有的邮件交换机都不接受邮件是，邮件服务器会在队列里放置一条消息。每个15分钟，服务器会重新尝试
+传送该邮件。互联网标准允许花5天时间传送一条消息，如果无法做到，会返回一条消息到发送方。
+
+如果邮件服务器无法找到域中的任何MX记录，并且也找不到与域名相同的主机记录，则会立刻返回一条消息给发送方。用户会问你为什么他的完全有效的
+邮件被拒绝了，然后你就可以告诉他yahoo.com不是以Q开头的。
+
+这两种错误完全不同，邮件发送者因此会有不同的体验。这也是为什么远离第一名字服务器的地方最好有第二名字服务器的原因之一。这样当你的第一名字服务器
+和邮件交换机挂掉了，邮件仍然可以在服务恢复的时候传送给你。
