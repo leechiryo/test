@@ -47,9 +47,6 @@ sudo apt-get install %package-name%
 # ファイルをrepositoryの管理に追加
 git add -a
 
-# 更新したいファイルをチェックアウトする
-git checkout filename
-
 # 更新したファイルをrepositoryにcommitする
 git commit -am "coment"
 
