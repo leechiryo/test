@@ -1,0 +1,58 @@
+#時間合わせ
+sudo ntpdate-debian
+
+#ファイルサーバに接続(~/fileserverから文字化けなくアクセスできる)
+sudo mount -t smbfs //172.22.11.1/share/KITZ\ CORPORATION /mnt/fileshare/KITZ\ CORPORATION
+sudo convmvfs ~/fileserver -o srcdir=/mnt/fileshare/KITZ\ CORPORATION,icharset=CP932,allow_other
+
+#ファイルサーバから切断
+sudo fusermount -u ~/fileserver/
+sudo umount -t smbfs /mnt/fileshare/KITZ\ CORPORATION
+
+# ファイル比較
+diff -u file1 file2
+
+# ツールの関連ファイルを探す
+locate apache2
+
+# apache再起動
+/etc/init.d/apache2 restart
+
+# 最近更新したファイルを探す（例えば、2日以内更新のあったファイル）
+find ./ -ctime -2
+
+# 文字列を探す（フォルダのファイルを再帰的に探す）
+grep -ri 'logo.gif' ./ *.*
+
+# screenの使い方
+ctrl+j 0 ( 1, 2, 3... change between terminal by No. selected.)
+ctrl+j j ( call last terminal changed )
+ctrl+j h ( change between terminal in the list order )
+ctrl+j c ( create a new terminal )
+ctrl+j l ( call terminal list window )
+
+# ソフトをインストール
+sudo apt-get install %package-name%
+# (存在しなければ)自分でFTPサーバで探して、手動で.debファイルをダウンロード
+# 下記のコマンドでインストールする
+sudo dpkg -i package_file.deb
+# または、手動で管理ファイルを更新
+# http://us.archive.ubuntu.com/ubuntu/dists/oneiric/main/binary-i386/Packages.gz
+# をダウンロードして、該当パッケージの内容で、
+# /var/lib/apt/lists/us.archive.ubuntu.com_ubuntu_dists_maverick-updates_main_binary-i386_Packages
+# を更新する、それからもう一度実行する
+sudo apt-get install %package-name%
+
+
+#文字コード変更（vim）
+:e ++enc=utf8
+
+# バイナリデータを表示する（vim）
+:%!xxd
+
+# バイナリデータから元に戻す（vim）
+:%!xxd -r
+
+# ウィンドウサイズ調整（vim）
+:res - N (decress N line)
+:res + N (incress N line)
