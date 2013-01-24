@@ -25,6 +25,7 @@ find ./ -ctime -2
 grep -ri 'logo.gif' ./ *.*
 
 # screenの使い方
+screen -t %NewTermName%
 ctrl+j 0 ( 1, 2, 3... change between terminal by No. selected.)
 ctrl+j j ( call last terminal changed )
 ctrl+j h ( change between terminal in the list order )
