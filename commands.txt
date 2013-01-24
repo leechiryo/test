@@ -37,9 +37,9 @@ sudo apt-get install %package-name%
 # 下記のコマンドでインストールする
 sudo dpkg -i package_file.deb
 # または、手動で管理ファイルを更新
-http://us.archive.ubuntu.com/ubuntu/dists/oneiric/main/binary-i386/Packages.gz
+# http://us.archive.ubuntu.com/ubuntu/dists/oneiric/main/binary-i386/Packages.gz
 # をダウンロードして、該当パッケージの内容で、
-/var/lib/apt/lists/us.archive.ubuntu.com_ubuntu_dists_maverick-updates_main_binary-i386_Packages
+# /var/lib/apt/lists/us.archive.ubuntu.com_ubuntu_dists_maverick-updates_main_binary-i386_Packages
 # を更新する、それからもう一度実行する
 sudo apt-get install %package-name%
 
@@ -47,8 +47,11 @@ sudo apt-get install %package-name%
 # ファイルをrepositoryの管理に追加
 git add -a
 
+# 更新したいファイルをチェックアウトする
+git checkout filename
+
 # 更新したファイルをrepositoryにcommitする
-git commit -m "coment"
+git commit -am "coment"
 
 # repositoryをリモートサーバに反映
 git push origin master
