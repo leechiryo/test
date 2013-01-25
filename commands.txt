@@ -45,6 +45,9 @@ sudo dpkg -i package_file.deb
 sudo apt-get install %package-name%
 
 ## gitでソース管理
+# githubから最新版取得
+git pull
+
 # ファイルをrepositoryの管理に追加
 git add -a
 
