@@ -70,14 +70,19 @@ git push origin master
 
 #ghostscript でEPSファイルをPNGファイルに変換（Windows）
 "c:\Program Files\gs\gs9.06\bin\gswin64c.exe" -dNOPAUSE -dBATCH -dEPSFitPage -sDEVICE=pnggray -r120x120 -dTextAlphaBits=4 -dGraphicsAlphaBits=4 -sOutputFile=2.png Q007263.eps
--dNOPAUSE：処理完了後に一時停止しない
--dBATCH：処理完了後にプログラムからExitし、GSシェルに入らない
--dEPSFitPage：画像のサイズを自動的にEPS画像のサイズに合わせて設定する
--sDEVICE=pnggray：出力するフォーマットを設定する（設定できる値がいろいろあるので、-helpで確認できる）
--r120x120：解像度（DPI）を120DPIに設定する
--dTextAlphaBits=4 -dGraphicsAlphaBits=4：アンチエイリアス設定。一般的に４に固定で一番きれい（テキストとグラフィックの部分がそれぞれ分けて設定することが可能）
--sOutputFile=2.png：出力ファイルを設定する
-Q007263.eps：入力ファイルを設定する
+#-dNOPAUSE：処理完了後に一時停止しない
+#-dBATCH：処理完了後にプログラムからExitし、GSシェルに入らない
+#-dEPSFitPage：画像のサイズを自動的にEPS画像のサイズに合わせて設定する
+#-sDEVICE=pnggray：出力するフォーマットを設定する（設定できる値がいろいろあるので、-helpで確認できる）
+#-r120x120：解像度（DPI）を120DPIに設定する
+#-dTextAlphaBits=4 -dGraphicsAlphaBits=4：アンチエイリアス設定。一般的に４に固定で一番きれい（テキストとグラフィックの部分がそれぞれ分けて設定することが可能）
+#-sOutputFile=2.png：出力ファイルを設定する
+#Q007263.eps：入力ファイルを設定する
+
+#ghostscript でEPSファイルをPDFファイルに変換（Windows）
+c:\LiZhi\Download\FM\image>"c:\Program Files\gs\gs9.06\bin\gswin64c.exe" -dNOPAUSE -dBATCH -dEPSFitPage -sDEVICE=pdfwrite -r120x120 -sOutputFile=2.pdf Q007263.eps
+#-sDEVICE=pdfwrite 出力するフォーマット(PDF)を設定する
+#PDF はベクター設備と認識される為、アンチエイリアス設定は要らない（値が１以上設定されたら逆にエラーになる）
 
 # バイナリデータを表示する（vim）
 :%!xxd
