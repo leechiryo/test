@@ -80,7 +80,8 @@ git push origin master
 #Q007263.eps：入力ファイルを設定する
 
 #ghostscript でEPSファイルをPDFファイルに変換（Windows）
-c:\LiZhi\Download\FM\image>"c:\Program Files\gs\gs9.06\bin\gswin64c.exe" -dNOPAUSE -dBATCH -dEPSFitPage -sDEVICE=pdfwrite -r120x120 -sOutputFile=2.pdf Q007263.eps
+"c:\Program Files\gs\gs9.06\bin\gswin64c.exe" -dNOPAUSE -dBATCH -dEPSFitPage -sDEVICE=pdfwrite -sOutputFile=2.pdf Q007263.eps
+#解像度の指定は不要です
 #-sDEVICE=pdfwrite 出力するフォーマット(PDF)を設定する
 #PDF はベクター設備と認識される為、アンチエイリアス設定は要らない（値が１以上設定されたら逆にエラーになる）
 
