@@ -19,7 +19,8 @@ locate apache2
 /etc/init.d/apache2 restart
 
 # 最近更新したファイルを探す（例えば、2日以内更新のあったファイル）
-find ./ -ctime -2
+find ./ -ctime -2 -type f
+# 最後の-type fがファイルを探すことを指定する(そうでないとフォルダも探す対象になる)
 
 # 文字列を探す（フォルダのファイルを再帰的に探す）
 grep -ri 'logo.gif' ./ *.*
@@ -81,7 +82,7 @@ git push origin master
 
 #ghostscript でEPSファイルをPDFファイルに変換（Windows）
 "c:\Program Files\gs\gs9.06\bin\gswin64c.exe" -dNOPAUSE -dBATCH -dEPSFitPage -sDEVICE=pdfwrite -sOutputFile=2.pdf Q007263.eps
-#解像度の指定は不要です
+#PDF出力時に解像度の設定が不要です
 #-sDEVICE=pdfwrite 出力するフォーマット(PDF)を設定する
 #PDF はベクター設備と認識される為、アンチエイリアス設定は要らない（値が１以上設定されたら逆にエラーになる）
 
