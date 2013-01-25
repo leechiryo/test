@@ -65,6 +65,9 @@ git push origin master
 :%s/^M//g
 #^Mを入力するには、［Ctrl］＋［V］キーを押してから、［Ctrl］＋［M］キーを押す。
 
+#ghostscript でEPSファイルをPNGファイルに変換（Windows）
+"c:\Program Files\gs\gs9.06\bin\gswin64c.exe" -dNOPAUSE -dBATCH -dEPSFitPage -sDEVICE=pnggray -r120x120 -sOutputFile=2.png Q007263.eps
+
 # バイナリデータを表示する（vim）
 :%!xxd
 
