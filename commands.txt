@@ -58,17 +58,6 @@ git commit -am "coment"
 # repositoryをリモートサーバに反映
 git push origin master
 
-
-#文字コード変更（vim）
-:e ++enc=utf8
-
-#改行コード変更（vim）
-:set ff=unix
-
-#無駄な改行utf8コードを削除
-:%s/^M//g
-#^Mを入力するには、［Ctrl］＋［V］キーを押してから、［Ctrl］＋［M］キーを押す。
-
 #ghostscript でEPSファイルをPNGファイルに変換（Windows）
 "c:\Program Files\gs\gs9.06\bin\gswin64c.exe" -dNOPAUSE -dBATCH -dEPSFitPage -sDEVICE=pnggray -r120x120 -dTextAlphaBits=4 -dGraphicsAlphaBits=4 -sOutputFile=2.png Q007263.eps
 #-dNOPAUSE：処理完了後に一時停止しない
@@ -85,6 +74,22 @@ git push origin master
 #PDF出力時に解像度の設定が不要です
 #-sDEVICE=pdfwrite 出力するフォーマット(PDF)を設定する
 #PDF はベクター設備と認識される為、アンチエイリアス設定は要らない（値が１以上設定されたら逆にエラーになる）
+
+# db2に接続
+su - sw
+password: sw
+db2 connect to swmngdb
+
+#文字コード変更（vim）
+:e ++enc=utf8
+
+#改行コード変更（vim）
+:set ff=unix
+
+#無駄な改行utf8コードを削除(vim)
+:%s/^M//g
+#^Mを入力するには、［Ctrl］＋［V］キーを押してから、［Ctrl］＋［M］キーを押す。
+
 
 # バイナリデータを表示する（vim）
 :%!xxd
