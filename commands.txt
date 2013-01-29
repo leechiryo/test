@@ -78,7 +78,8 @@ git push origin master
 # db2に接続
 su - sw
 password: sw
-db2 connect to swmngdb
+db2
+db2 => connect to swmngdb
 
 #文字コード変更（vim）
 :e ++enc=utf8
